@@ -32,8 +32,8 @@ int main(int argc, char *argv[]){
     printf("\t[+] allocating 12 bytes of memory on the heap for int_pointer\n");
     int_pointer = (int *) errocheckd_malloc(12);
 
-    int_pointer* = 31337;
-    printf("int_pointer[%p] ---> %d\n", int_pointer, int_pointer*);
+    *int_pointer = 31337;
+    printf("int_pointer[%p] ---> %d\n", int_pointer, *int_pointer);
 
     printf("\t[-] freeing char_pointer's heap memory...\n");
     free(char_pointer);
@@ -57,9 +57,9 @@ void *errocheckd_malloc(unsigned int size) {
     void *pointer;
     pointer = malloc(size);
 
-    if(ptr == NULL) {
+    if(pointer == NULL) {
         fprintf(stderr, "ERROR: Could not allocate heap memory");
         exit(-1);
     }
-    return ptr;
+    return pointer;
 }
