@@ -6,6 +6,7 @@ This program accepts a note as a command-line argument and then adds it to the e
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 #include <fcntl.h>
 #include <sys/stat.h>
 
