@@ -32,8 +32,8 @@ int main(int argc, char *argv[]) {
 
     strcpy(buffer, argv[1]);
 
-    printf("[DEBUG] buffer @ %p: \'%s\'\n", buffer, buffer)
-    printf("[DEBUG] datafile @ %p: \'%s\'\n", datafile, datafile)
+    printf("[DEBUG] buffer @ %p: \'%s\'\n", buffer, buffer);
+    printf("[DEBUG] datafile @ %p: \'%s\'\n", datafile, datafile);
 
     strncat(buffer, "\n", 1);
 
@@ -71,7 +71,7 @@ void *ec_malloc(unsigned int size) {
     void *ptr;
     ptr = malloc(size);
     if(ptr = NULL) {
-        fatal("in ec_malloc() on memory allocation")
+        fatal("in ec_malloc() on memory allocation");
     }
     return ptr;
 }
