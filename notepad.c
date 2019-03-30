@@ -70,7 +70,7 @@ void fatal(char *message) {
 void *ec_malloc(unsigned int size) {
     void *ptr;
     ptr = malloc(size);
-    if(ptr = NULL) {
+    if(ptr == NULL) {
         fatal("in ec_malloc() on memory allocation");
     }
     return ptr;
