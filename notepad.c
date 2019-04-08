@@ -9,6 +9,7 @@ This program accepts a note as a command-line argument and then adds it to the e
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/stat.h>
+#include "functions.h"
 
 void usage(char *program_name, char *file_name) {
     printf("Usage: %s <data to add to %s>\n", program_name, file_name);
@@ -20,6 +21,7 @@ void *ec_malloc(unsigned int);  // an error-checked malloc() wrapper
 
 int main(int argc, char *argv[]) {
     int fd; // file descriptor
+    int userid;
     char *buffer;
     char *datafile;
 
@@ -44,9 +46,16 @@ int main(int argc, char *argv[]) {
         fatal("in main() while opening file");
     printf("[DEBUG] file descriptor is %d\n", fd);
 
+    userid = getuid(); // get the real user ID
+
     // Writing data
-    if(write(fd, buffer, strlen(buffer)) == -1)
+    if(write(fd, &userid, 4) == -1) // Write user ID before note data
+        fatal("in main() while writing userid to file");
+    write(fd, "\n", 1); // Terminate line
+
+    if(write(fd, buffer, strlen(buffer)) == -1) // Write note
         fatal("in main() while writing buffer to file");
+    write(fd, "\n", 1); // Terminate line
 
     // Closing file
     if(close(fd) == -1)
@@ -58,21 +67,4 @@ int main(int argc, char *argv[]) {
 
 }
 
-// Function to display error message and then exit
-void fatal(char *message) {
-    char error_message[100];
 
-    strcpy(error_message, "[!!] Fatal Error ");
-    strncat(error_message, message, 83);
-    perror(error_message);
-    exit(-1);
-}
-// An error-checked malloc() wrapper function
-void *ec_malloc(unsigned int size) {
-    void *ptr;
-    ptr = malloc(size);
-    if(ptr == NULL) {
-        fatal("in ec_malloc() on memory allocation");
-    }
-    return ptr;
-}
