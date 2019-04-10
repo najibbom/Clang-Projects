@@ -18,7 +18,7 @@ int main(int argc, char *argv[]) {
     if (argc > 1)                       // If there is an argument
         strcpy(searchstring, argv[1]);  // that is the search string
     else                                // otherwise,
-        searchstring[0] = 0             // search string is empty
+        searchstring[0] = 0;             // search string is empty
     
     userid = getuid();
     fd = open(FILENAME, O_RDONLY);      // open the file for read-only access
