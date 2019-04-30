@@ -16,7 +16,7 @@ int main() {
     // Three different ways to acces struct elements:
     hour = current_time.tm_hour;    // Direct access
     minute = time_ptr->tm_min;      // Access via pointer
-    second = *((int *) time_ptr)    // Hackey pointer access
+    second = *((int *) time_ptr);    // Hackey pointer access
 
     printf("Current time is: %02d:%02d:%02d\n", hour, minute, second);
 }
