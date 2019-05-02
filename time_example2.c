@@ -10,7 +10,7 @@ void dump_time_struct_bytes(struct tm *time_ptr, int size) {
     for(i = 0; i < size; i++)
     {
 	printf("%02x ", raw_ptr[i]);
-	if(i % 16 = 15)	// Print a new line every 16 bytes
+	if(i % 16 == 15)	// Print a new line every 16 bytes
 		printf("\n");
     }
     printf("\n");
@@ -31,7 +31,7 @@ int main() {
 
     // Three ways to access struct elements:
     hour = current_time.tm_hour; // Direct access
-    minute = time_ptr->tm_minute; // Access via pointer
+    minute = time_ptr->tm_min; // Access via pointer
     second = *((int *) time_ptr); // Hacky pointer access
 
     printf("Current time is: %02d:%02d:%02d\n", hour, minute, second);
